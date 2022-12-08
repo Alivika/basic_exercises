@@ -15,8 +15,8 @@ students = [
     {'first_name': 'Петя'},
 ]
 
-list = [student['first_name'] for student in students]
-for key, value in Counter(list).items():
+student_names = [student['first_name'] for student in students]
+for key, value in Counter(student_names).items():
     print(f'{key}: {value}')
 
 
@@ -34,9 +34,9 @@ students = [
     {'first_name': 'Оля'},
 ]
 
-list = [student['first_name'] for student in students]
-for key, value in Counter(list).most_common(1):
-     print(f'Самое частое имя среди учеников: {key}')
+names_counter = Counter([student['first_name'] for student in students])
+name, total = names_counter.most_common(1)[0]
+print(f'Самое частое имя среди учеников: {name}')
 
 
 

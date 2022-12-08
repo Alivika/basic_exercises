@@ -14,7 +14,8 @@ for name in names:
 
 names = ['Оля', 'Петя', 'Вася', 'Маша']
 for name in names:
-    print(f'{name}: {len(name)}')
+    print('{}: {}'.format(name, len(name)))
+ 
 
 
 # Задание 3
@@ -28,11 +29,11 @@ is_male = {
 }
 
 names = ['Оля', 'Петя', 'Вася', 'Маша']
+
 for name in names:
-    if is_male[name]:
-        print(f'{name}, пол мужской')
-    else:
-        print(f'{name}, пол женский')
+    gender = 'пол мужской' if is_male[name] else 'пол женский'
+    print(f'{name}: {gender}')
+
 
 
 # Задание 4
@@ -69,9 +70,7 @@ groups = [
 
 i = 1
 for group in groups: 
-    names = ''
-    for name in group:
-        names = names  + name + ' '
+    names = ' '.join(group)
     print(f'Группа {i}: {names}')
     i += 1
     

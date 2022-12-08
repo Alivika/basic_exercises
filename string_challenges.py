@@ -11,10 +11,10 @@ print(word.lower().count('а'))
 word = 'Архангельск'
 
 def countVowels(word):
-   vowels = ['а', 'е', 'ё', 'и', 'о', 'у', 'э', 'ю', 'я']
+   vowels = {'а', 'е', 'ё', 'и', 'о', 'у', 'э', 'ю', 'я'}
    count = 0
-   for letter in word:
-      if letter.lower() in vowels:
+   for letter in word.lower():
+      if letter in vowels:
          count += 1
    print(count)
 
@@ -37,8 +37,10 @@ for word in sentence.split(' '):
 sentence = 'Мы приехали в гости'
 def avg_word(sentence):
    avg_len = 0
+   words_sum = 0
    for word in sentence.split(' '):
-      avg_len = (len(word) / len(sentence.split(' ')))
+      words_sum += len(word)
+      avg_len = words_sum / len(sentence.split(' '))
    print(avg_len)
 
 avg_word(sentence)
