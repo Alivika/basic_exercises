@@ -1,3 +1,5 @@
+from collections import Counter
+
 # Задание 1
 # Дан список учеников, нужно посчитать количество повторений каждого имени ученика
 # Пример вывода:
@@ -12,13 +14,18 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+
+student_names = [student['first_name'] for student in students]
+for key, value in Counter(student_names).items():
+    print(f'{key}: {value}')
+
 
 
 # Задание 2
 # Дан список учеников, нужно вывести самое часто повторящееся имя
 # Пример вывода:
 # Самое частое имя среди учеников: Маша
+
 students = [
     {'first_name': 'Вася'},
     {'first_name': 'Петя'},
@@ -26,7 +33,11 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+names_counter = Counter([student['first_name'] for student in students])
+name, total = names_counter.most_common(1)[0]
+print(f'Самое частое имя среди учеников: {name}')
+
 
 
 # Задание 3
@@ -51,7 +62,14 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+
+j = 1
+for group in school_students:
+    list = [student['first_name'] for student in group]
+    for key, value in Counter(list).most_common(1):
+        print(f'Самое частое имя в классе {j}: {key}')
+    j += 1
+
 
 
 # Задание 4
@@ -61,9 +79,12 @@ school_students = [
 # Класс 2б: девочки 0, мальчики 2
 
 school = [
-    {'class': '2a', 'students': [{'first_name': 'Маша'}, {'first_name': 'Оля'}]},
-    {'class': '2б', 'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}]},
-    {'class': '2б', 'students': [{'first_name': 'Даша'}, {'first_name': 'Олег'}, {'first_name': 'Маша'}]},
+    {'class': '2a', 
+     'students': [{'first_name': 'Маша'}, {'first_name': 'Оля'}]},
+    {'class': '2б', 
+     'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}]},
+    {'class': '2в', 
+     'students': [{'first_name': 'Даша'}, {'first_name': 'Олег'}, {'first_name': 'Маша'}]},
 ]
 is_male = {
     'Олег': True,
@@ -72,7 +93,23 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+
+def count_genders(school):
+    male, female = 0, 0
+    for classes in school:
+        class_name = classes['class']
+        for student in classes['students']:
+            if is_male[student['first_name']]:
+                male += 1
+            else:
+                female += 1
+
+        print(f'Класс {class_name}: девочки {female} мальчики {male}')
+        male, female = 0, 0
+
+count_genders(school)
+
+
 
 
 # Задание 5
@@ -91,5 +128,21 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
 
+def whos_more(school):
+    male, female = 0, 0
+    for classes in school:
+        class_name = classes['class']
+        for student in classes['students']:
+            if is_male[student['first_name']]:
+                male += 1
+            else:
+                female += 1
+        if male > female:
+            print(f'Больше всего мальчиков в классе: {class_name}')
+        else:
+            print(f'Больше всего девочек в классе: {class_name}')
+        
+        male, female = 0, 0
+
+whos_more(school)
